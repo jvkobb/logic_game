@@ -3,7 +3,6 @@ import 'package:game/riddle_element.dart';
 import 'package:game/riddles.dart';
 
 
-// w UI wogole nie powinnismy uzywac riddles
 class HomeWidget extends StatelessWidget {
   HomeWidget({super.key});
 

@@ -1,8 +1,9 @@
 part of './riddle_bloc.dart';
 
-enum Status { noStarted, onGoing, successed, failed, completed }
+enum Status { onGoing, successed, failed }
 
 final class RiddleState {
   List<Riddle> riddles;
-  RiddleState(this.riddles);
+  Status? status;
+  RiddleState(this.riddles, this.status);
 }

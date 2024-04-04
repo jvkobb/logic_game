@@ -1,25 +1,32 @@
 import 'package:bloc/bloc.dart';
+import 'package:game/blocs/animation/animation_cubit.dart';
 import 'package:game/riddle_model.dart';
 import 'package:game/riddles.dart';
 
 part './riddle_event.dart';
 part './riddle_state.dart';
 
-// part 'riddle_state.dart';
-
 class RiddleBloc extends Bloc<RiddleEvent, RiddleState> {
-  RiddleBloc() : super(RiddleState(riddles)) {
-    late final Riddle currentRiddle;
+  final AnimationCubit animationCubit;
+  RiddleBloc(this.animationCubit) : super(RiddleState(riddles, null)) {
+    late Riddle currentRiddle;
+
     on<StartGame>(
       (event, emit) {
         currentRiddle = riddles[event.index];
-        print(currentRiddle.numbers);
+        emit(RiddleState(riddles, Status.onGoing));
       },
     );
 
     on<CheckAnswer>((event, emit) {
       if (currentRiddle.solution == event.guessNumber) {
-        print('you did it!');
+        int index =
+            currentRiddle.numbers.indexWhere((element) => element == null);
+        currentRiddle.numbers[index] = event.guessNumber;
+        emit(RiddleState(riddles, Status.successed));
+      } else {
+        animationCubit.shake();
+        emit(RiddleState(riddles, Status.failed));
       }
     });
 

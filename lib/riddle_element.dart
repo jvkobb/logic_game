@@ -27,12 +27,13 @@ class RiddleElement extends StatelessWidget {
                 gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
-                    colors: currrentRiddle.isCompleted == true
+                    colors: currrentRiddle.isDone 
                         ? const [
                             Color.fromARGB(255, 122, 188, 124),
                             Color.fromARGB(255, 128, 137, 137)
                           ]
-                        : const [
+                        : 
+                          const [
                             Color.fromARGB(255, 91, 89, 89),
                             Color.fromARGB(255, 92, 91, 91)
                           ]),
